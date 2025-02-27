@@ -17,7 +17,6 @@ import frc.robot.Constants.SensorConstants;
 public class Elevator extends SubsystemBase {
   /** Creates a new Elevator. */
   private final SparkMax m_elevator;
-  private final DigitalInput limitMagneticSwitch;
   private final DigitalInput limitMechanicalSwitch;
   private final  RelativeEncoder encoderElevador;
 
@@ -25,7 +24,6 @@ public class Elevator extends SubsystemBase {
     // Add encoders
     public Elevator() {
         m_elevator = new SparkMax(1, MotorType.kBrushless);
-        limitMagneticSwitch = new DigitalInput(SensorConstants.MAGNETICSENSOR_DIGITAL_INPUT_PORT);
         limitMechanicalSwitch = new DigitalInput(SensorConstants.MECHANICALSWITCH_DIGITAL_INPUT_PORT);
         encoderElevador = m_elevator.getEncoder();
     }
@@ -49,7 +47,8 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean IsElevatorMin(){
-      return (Math.abs(encoderElevador.getPosition()-Constants.OperatorConstants.MinElevatorPosition) < 5);
+      System.out.println(limitMechanicalSwitch.get());
+      return (limitMechanicalSwitch.get());
     }
 
     public boolean IsElevatorMaxDesired(){

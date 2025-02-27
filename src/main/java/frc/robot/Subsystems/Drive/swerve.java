@@ -159,7 +159,7 @@ public class swerve extends SubsystemBase{
     }
 
     public double getAngle(){
-      return gyro.getYaw().getValueAsDouble();
+      return -gyro.getYaw().getValueAsDouble();
     }
 
     public RobotConfig getPathPlannerConfiguration(){

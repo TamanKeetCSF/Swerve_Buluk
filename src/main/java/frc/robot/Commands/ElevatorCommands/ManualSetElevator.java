@@ -33,9 +33,9 @@ public class ManualSetElevator extends Command {
     System.out.println("angulo elevador"+ elevator.getElevatorPosition());
 
    
-    
+    // este codigo iba en la condicion de abajo(elevator.getElevatorPosition() > Constants.OperatorConstants.MinElevatorPosition && potencia <= 0) || (elevator.getElevatorPosition() < Constants.OperatorConstants.MaxElevatorPosition && potencia >= 0)
 
-    if((elevator.getElevatorPosition() > Constants.OperatorConstants.MinElevatorPosition && potencia <= 0) || (elevator.getElevatorPosition() < Constants.OperatorConstants.MaxElevatorPosition && potencia >= 0)){
+    if(elevator.IsElevatorMin()){
       elevator.setElevator(0);
     }
     else{

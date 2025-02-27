@@ -45,7 +45,16 @@ public class RobotContainer {
     
    
     configureBindings();
-    m_elevador.setDefaultCommand(new ManualSetElevator(null, Player2Controller));
+    
+    chassis.setDefaultCommand(
+      DriveCommands.joystickDrive(
+        chassis,
+        ()-> driver.getLeftY() * 0.4,
+        ()-> driver.getLeftX() * 0.4,
+        ()-> -driver.getRightX() * 0.4));
+
+    driver.L1().whileTrue(DriveCommands.brake(chassis));
+    m_elevador.setDefaultCommand(new ManualSetElevator(m_elevador, Player2Controller));
     m_intake.setDefaultCommand(new ManualSetIntake(m_intake, Player2Controller));
     m_colgador.setDefaultCommand(new hangCommand(m_colgador, Player2Controller));
   }
@@ -102,17 +111,9 @@ public class RobotContainer {
       .onFalse(new InstantCommand(() -> m_bola.ballIntakeStop(),m_bola));
 
       //colgar
-      //button2Y.whileTrue(new InstantCommand(()-> m_colgador.setHanger(Player2Controller)))
-      //.onFalse(new InstantCommand(()-> m_colgador.hangerStop()));
       
-    chassis.setDefaultCommand(
-      DriveCommands.joystickDrive(
-        chassis,
-        ()-> driver.getLeftY() * 0.8,
-        ()-> driver.getLeftX() * 0.8,
-        ()-> -driver.getRightX() * 0.7));
-
-    driver.L1().whileTrue(DriveCommands.brake(chassis));
+      
+    
    
   }
 
