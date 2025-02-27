@@ -9,9 +9,11 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.BulukLib.Swerve.SwerveConfig.measures;
+import frc.robot.BulukLib.Swerve.SwerveConfig.speeds;
 import frc.robot.BulukLib.Util.QoLUtil;
 import frc.robot.Subsystems.Drive.swerve;
 
@@ -52,17 +54,19 @@ public class DriveCommands {
         () -> {
           // Apply deadband
 
-          Translation2d linearVelocity = getLinearVelocityFromJoysticks(-(xSupplier.getAsDouble()*(1+R2.getAsDouble())*(1-(L2.getAsDouble()*0.9))), -(ySupplier.getAsDouble()*(1+R2.getAsDouble())*(1-(L2.getAsDouble()*0.9))));
-          double omega = MathUtil.applyDeadband((omegaSupplier.getAsDouble()*(1+R2.getAsDouble())*(1-(L2.getAsDouble()*0.9))), DEADBAND);
+          Translation2d linearVelocity = getLinearVelocityFromJoysticks((xSupplier.getAsDouble()), (ySupplier.getAsDouble()));
+          double omega = MathUtil.applyDeadband((omegaSupplier.getAsDouble()), DEADBAND);
 
           // Square values
           omega = Math.copySign(QoLUtil.square(omega), omega);
 
+          SmartDashboard.putNumber("XLINEAR FINAL",(linearVelocity.getX()*(2+R2.getAsDouble())));
+
           ChassisSpeeds speeds =
               new ChassisSpeeds(
-                  linearVelocity.getX() * drive.getMaxLinearSpeedMetersPerSec(),
-                  linearVelocity.getY() * drive.getMaxLinearSpeedMetersPerSec(),
-                  omega * drive.getMaxAngularSpeedRadPerSec());
+                  (linearVelocity.getX()*(2+R2.getAsDouble()) * drive.getMaxLinearSpeedMetersPerSec()),
+                  (linearVelocity.getY()*(2+R2.getAsDouble()))* drive.getMaxLinearSpeedMetersPerSec(),
+                  (omega*(2+R2.getAsDouble())) * drive.getMaxAngularSpeedRadPerSec());
           boolean isFlipped =
               DriverStation.getAlliance().isPresent()
                   && DriverStation.getAlliance().get() == Alliance.Red;
