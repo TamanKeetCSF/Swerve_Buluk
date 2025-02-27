@@ -9,7 +9,7 @@ public class Constants {
     public static final double MaxElevatorSpeed = 0.4;
     public static final double MaxArmSpeed = 0.2;
 
-    public static final double MaxElevatorPosition = -100;
+    public static final double MaxElevatorPosition = -150;
     public static final double MinElevatorPosition = 0;
 
     public static final double DesiredMaxElevatorPosition = -100;

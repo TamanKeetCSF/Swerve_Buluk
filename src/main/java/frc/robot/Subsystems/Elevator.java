@@ -10,7 +10,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Constants.SensorConstants;
 
@@ -82,7 +82,9 @@ public class Elevator extends SubsystemBase {
     }
 
     public double getElevatorPosition() {
-      return (encoderElevador.getPosition());
+      double elevatorPos = encoderElevador.getPosition();
+      SmartDashboard.putNumber("ELEVATOR_ENCODER",elevatorPos);
+      return (elevatorPos);
    }
 
 
