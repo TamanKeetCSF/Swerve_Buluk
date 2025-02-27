@@ -3,6 +3,8 @@ package frc.robot.Commands.ElevatorCommands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Elevator;
+import frc.robot.Constants;
+
 
 public class ManualSetElevator extends Command {
   
@@ -25,13 +27,19 @@ public class ManualSetElevator extends Command {
   @Override
   public void execute() {
     //if(!elevator.IsElevatorMax() && !elevator.IsElevatorMin())
-    double potencia = -controller.getRightY();
+    double potencia = -controller.getLeftY();
+    //System.out.println("minimo alcanzado" + elevator.IsElevatorMin());
+    //System.out.println("maximo alcanzado" + elevator.IsElevatorMax());
+    System.out.println("angulo elevador"+ elevator.getElevatorPosition());
 
-    if((!elevator.IsElevatorMax() && potencia <= 0) || (!elevator.IsElevatorMin() && potencia >= 0)){
+   
+    
+
+    if((elevator.getElevatorPosition() > Constants.OperatorConstants.MinElevatorPosition && potencia <= 0) || (elevator.getElevatorPosition() < Constants.OperatorConstants.MaxElevatorPosition && potencia >= 0)){
       elevator.setElevator(0);
     }
     else{
-      elevator.setElevator(potencia);
+      elevator.setElevator(potencia*0.3);
     }
       
   }

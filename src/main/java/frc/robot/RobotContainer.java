@@ -10,17 +10,22 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.Commands.ElevatorCommands.ManualSetElevator;
 import frc.robot.Commands.IntakeCommands.ManualSetIntake;
+import frc.robot.Commands.HangingCommands.hangCommand;
+import frc.robot.Commands.IntakeCommands.SetIntakeMax;
 import frc.robot.Commands.swerve.DriveCommands;
-import frc.robot.Subsystems.BallIntake;
 
+import frc.robot.Subsystems.BallIntake;
 import frc.robot.Subsystems.Hanger;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Drive.swerve;
 import frc.robot.Subsystems.Elevator;
+
+
 public class RobotContainer {
 
   swerve chassis = new swerve();
@@ -41,7 +46,8 @@ public class RobotContainer {
    
     configureBindings();
     m_elevador.setDefaultCommand(new ManualSetElevator(null, Player2Controller));
-    m_intake.setDefaultCommand(new ManualSetIntake(m_intake));
+    m_intake.setDefaultCommand(new ManualSetIntake(m_intake, Player2Controller));
+    m_colgador.setDefaultCommand(new hangCommand(m_colgador, Player2Controller));
   }
 
   private void configureBindings() {
@@ -66,6 +72,39 @@ public class RobotContainer {
       final JoystickButton button2BumperR = new JoystickButton(Player2Controller, 6);
       Trigger leftTrigger = new Trigger(() -> Player2Controller.getRawAxis(2) > 0.4); // Left trigger
       Trigger rightTrigger = new Trigger(() -> Player2Controller.getRawAxis(3) > 0.4); // Right trigger
+
+          //bindings subsistemas
+
+      //intake
+
+
+       button2A.onTrue(new SetIntakeMax(m_intake)); 
+      button2B.onTrue(new InstantCommand(() -> m_intake.ponerAngulo(40)));
+      button2X.onTrue(new InstantCommand(() -> m_intake.ponerAngulo(170)));
+
+      rightTrigger.onTrue(new InstantCommand(() -> m_intake.Comer(),m_intake))
+      .onFalse(new InstantCommand(() -> m_intake.DejarComer(),m_intake));
+
+      leftTrigger.onTrue(new InstantCommand(() -> m_intake.DesComer(),m_intake))
+      .onFalse(new InstantCommand(() -> m_intake.DejarComer(),m_intake));
+
+      //elevator
+      new POVButton(Player2Controller, 0).onTrue(new InstantCommand(() -> m_bola.marcoBaja()))
+      .onFalse(new InstantCommand(() -> m_bola.marcoStop()));
+      new POVButton(Player2Controller, 180).onTrue(new InstantCommand(() -> m_bola.marcoSube()))
+      .onFalse(new InstantCommand(() -> m_bola.marcoStop()));;
+
+      //ball intake
+      button2BumperR.onTrue(new InstantCommand(() -> m_bola.ballIntakeComer(),m_bola))
+      .onFalse(new InstantCommand(() -> m_bola.ballIntakeStop(),m_bola));
+
+      button2BumperL.onTrue(new InstantCommand(() -> m_bola.ballIntakeSacar(),m_bola))
+      .onFalse(new InstantCommand(() -> m_bola.ballIntakeStop(),m_bola));
+
+      //colgar
+      //button2Y.whileTrue(new InstantCommand(()-> m_colgador.setHanger(Player2Controller)))
+      //.onFalse(new InstantCommand(()-> m_colgador.hangerStop()));
+      
     chassis.setDefaultCommand(
       DriveCommands.joystickDrive(
         chassis,
