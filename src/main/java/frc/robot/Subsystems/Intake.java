@@ -29,7 +29,10 @@ public class Intake extends SubsystemBase {
 
   /** Creates a new Intake. */
   public Intake() {
+    
     encoderArm = muneca.getEncoder();
+    encoderArm.setPosition(0);
+    
     //encoderArm.setPosition(0);  
 
     PIDMuneca = new PIDController(kP, kI, kD);
@@ -75,11 +78,11 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean IsIntakeMax(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.MaxArmPosition) < 5);
+    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.MaxArmPosition) < 8);
   }
 
   public boolean IsIntakeMaxDesired(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredMaxArmPosition) < 5);
+    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredPonerCoral) < 8);
   }
 
 }

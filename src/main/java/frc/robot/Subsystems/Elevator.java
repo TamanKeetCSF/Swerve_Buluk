@@ -18,14 +18,18 @@ public class Elevator extends SubsystemBase {
   /** Creates a new Elevator. */
   private final SparkMax m_elevator;
   private final DigitalInput limitMechanicalSwitch;
+  private final DigitalInput limitMagneticSwitch;
   private final  RelativeEncoder encoderElevador;
 
 
     // Add encoders
     public Elevator() {
         m_elevator = new SparkMax(1, MotorType.kBrushless);
+       
         limitMechanicalSwitch = new DigitalInput(SensorConstants.MECHANICALSWITCH_DIGITAL_INPUT_PORT);
+        limitMagneticSwitch = new DigitalInput(SensorConstants.MAGNETICSENSOR_DIGITAL_INPUT_PORT);
         encoderElevador = m_elevator.getEncoder();
+        encoderElevador.setPosition(0);
     }
 
     @Override
@@ -36,6 +40,11 @@ public class Elevator extends SubsystemBase {
     public void setElevator(double potencia) {
       m_elevator.set(-potencia);  
     }
+    public void resetEncoderButton(){
+      if(IsElevatorMin()){
+        encoderElevador.setPosition(0);
+      }
+    }
 
     public void elevatorStop() {
         m_elevator.set(0.0);  
@@ -43,12 +52,21 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean IsElevatorMax(){
-      return (Math.abs(encoderElevador.getPosition()-Constants.OperatorConstants.MaxElevatorPosition) < 5);
+
+      System.out.println(limitMagneticSwitch.get());
+
+      return limitMagneticSwitch.get();
+      //return (Math.abs(encoderElevador.getPosition()-Constants.OperatorConstants.MaxElevatorPosition) < 5);
+    }
+    public boolean IsElevatorMinEncoder(){
+      return (Math.abs(encoderElevador.getPosition()-Constants.OperatorConstants.MinElevatorPosition) < 5);
     }
 
+    public boolean IsElevatorMaxEncoder(){
+      return (Math.abs(encoderElevador.getPosition()-Constants.OperatorConstants.MaxElevatorPosition) < 5);
+    }
     public boolean IsElevatorMin(){
-      System.out.println(limitMechanicalSwitch.get());
-      return (limitMechanicalSwitch.get());
+      return limitMechanicalSwitch.get();
     }
 
     public boolean IsElevatorMaxDesired(){

@@ -39,8 +39,9 @@ public class ManualSetIntake extends Command {
     intake.setIntake(0);
     }
     else{
-      intake.setIntake(potencia*0.2);
+      intake.setIntake(potencia*0.5);
     }
+
   }
 
   // Called once the command ends or is interrupted.
