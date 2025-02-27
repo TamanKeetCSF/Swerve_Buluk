@@ -4,6 +4,11 @@ import frc.robot.BulukLib.MotionControllers.Gains.Gains;
 
 public class Constants {
 
+  public static class OperatorConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final double MaxElevatorSpeed = 0.92;
+  }
+
   public class DriveConstants {
 
     public static final Gains driveGains = new Gains(0.015, 0, 0, 0.05, 0.06); //0.13
@@ -48,7 +53,11 @@ public class Constants {
         public static final boolean TurnmotorReversed = true;
 
     }
+  }
 
-}
+  public static class SensorConstants {
+    public static final int MAGNETICSENSOR_DIGITAL_INPUT_PORT = 0;
+    public static final int MECHANICALSWITCH_DIGITAL_INPUT_PORT = 1;
+  }
 
 }
