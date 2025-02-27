@@ -21,7 +21,7 @@ public class SetIntakeMax extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int signDif =(intake.getArmAngle()-Constants.OperatorConstants.DesiredMaxArmPosition > 0)?-1:1;
+    int signDif =(intake.getArmAngle()-Constants.OperatorConstants.DesiredPonerCoral > 0)?-1:1;
     intake.setIntake(OperatorConstants.MaxArmSpeed*signDif);
   }
 
