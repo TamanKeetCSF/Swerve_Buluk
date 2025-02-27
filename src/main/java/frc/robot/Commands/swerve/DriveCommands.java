@@ -45,13 +45,15 @@ public class DriveCommands {
       swerve drive,
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
-      DoubleSupplier omegaSupplier) {
+      DoubleSupplier omegaSupplier,
+      DoubleSupplier R2,
+      DoubleSupplier L2) {
     return Commands.run(
         () -> {
           // Apply deadband
-          Translation2d linearVelocity = getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
 
-          double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
+          Translation2d linearVelocity = getLinearVelocityFromJoysticks(-(xSupplier.getAsDouble()*(1+R2.getAsDouble())*(1-(L2.getAsDouble()*0.9))), -(ySupplier.getAsDouble()*(1+R2.getAsDouble())*(1-(L2.getAsDouble()*0.9))));
+          double omega = MathUtil.applyDeadband((omegaSupplier.getAsDouble()*(1+R2.getAsDouble())*(1-(L2.getAsDouble()*0.9))), DEADBAND);
 
           // Square values
           omega = Math.copySign(QoLUtil.square(omega), omega);

@@ -38,6 +38,8 @@ public class RobotContainer {
   private final Hanger m_colgador = new Hanger();
   private final BallIntake m_bola = new BallIntake();
   public final Intake m_intake = new Intake();
+  public final double DriveNerf = 0.0;
+  public final double SteerNerf = 0.0;
 
 
   public RobotContainer() {
@@ -49,9 +51,11 @@ public class RobotContainer {
     chassis.setDefaultCommand(
       DriveCommands.joystickDrive(
         chassis,
-        ()-> driver.getLeftY() * 0.4,
-        ()-> driver.getLeftX() * 0.4,
-        ()-> -driver.getRightX() * 0.4));
+        ()-> driver.getLeftY() * 0.5,
+        ()-> driver.getLeftX() * 0.5,
+        ()-> -driver.getRightX() * 0.5,
+        ()->  Player1Controller.getR2Axis(),
+        ()-> Player1Controller.getL2Axis()));
 
     driver.L1().whileTrue(DriveCommands.brake(chassis));
     m_elevador.setDefaultCommand(new ManualSetElevator(m_elevador, Player2Controller));
@@ -112,7 +116,7 @@ public class RobotContainer {
 
       //colgar
       
-      
+      //Swerve Drive Bindings
     
    
   }

@@ -152,7 +152,7 @@ public class swerve extends SubsystemBase{
         Twist2d twist = kinematics.toTwist2d(moduleDeltas);
         rawGyroRotation = rawGyroRotation.plus(new Rotation2d(twist.dtheta));
       }
-      SmartDashboard.putNumber("NaxX", getAngle());
+      SmartDashboard.putNumber("Pigeon2", getAngle());
 
       // Apply odometry update
       poseEstimator.update(rawGyroRotation, modulePositions);
