@@ -47,11 +47,10 @@ public class DriveCommands {
           Translation2d linearVelocity = getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
           double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
           omega = Math.copySign(QoLUtil.square(omega), omega);
-          SmartDashboard.putNumber("XLINEAR FINAL", (linearVelocity.getX() * (2 + R2.getAsDouble())));
           ChassisSpeeds speeds = new ChassisSpeeds(
-                  (-(linearVelocity.getX() * (2 + R2.getAsDouble()) * drive.getMaxLinearSpeedMetersPerSec())),
-                  (-(linearVelocity.getY() * (2 + R2.getAsDouble()) * drive.getMaxLinearSpeedMetersPerSec())),
-                  (omega * (2 + R2.getAsDouble())) * drive.getMaxAngularSpeedRadPerSec());
+                  ((((linearVelocity.getX() * (2 + R2.getAsDouble()))/(2+L2.getAsDouble())) * drive.getMaxLinearSpeedMetersPerSec())),
+                  ((((linearVelocity.getY() * (2 + R2.getAsDouble()))/(2+L2.getAsDouble())) * drive.getMaxLinearSpeedMetersPerSec())),
+                  (((omega * (2 + R2.getAsDouble()))/(2+L2.getAsDouble())) * drive.getMaxAngularSpeedRadPerSec()));
           boolean isFlipped = DriverStation.getAlliance().isPresent()
                   && DriverStation.getAlliance().get() == Alliance.Red;
           drive.runVelocity(
