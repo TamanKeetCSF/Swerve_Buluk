@@ -27,11 +27,11 @@ public class BallIntake extends SubsystemBase {
     }
   
     public void marcoSube() {
-      m_marco.set(0.75);  
+      m_marco.set(0.6);  
   }
   
   public void marcoBaja() {
-      m_marco.set(-0.75);  
+      m_marco.set(-0.6);  
   }
   
   public void marcoStop() {
