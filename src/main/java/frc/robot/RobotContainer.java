@@ -13,13 +13,15 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import frc.robot.Commands.AutonomousCommands.AutonomoMain;
 import frc.robot.Commands.ElevatorCommands.ManualSetElevator;
 import frc.robot.Commands.IntakeCommands.ManualSetIntake;
-import frc.robot.Commands.IntakeCommands.PonerArriba;
-import frc.robot.Commands.IntakeCommands.SetIntakeComer;
+
+
 import frc.robot.Commands.HangingCommands.hangCommand;
 import frc.robot.Commands.IntakeCommands.SetIntakeMax;
+import frc.robot.Commands.IntakeCommands.SetIntakeComer;
+import frc.robot.Commands.IntakeCommands.PonerArriba;
 import frc.robot.Commands.swerve.DriveCommands;
 
 import frc.robot.Subsystems.BallIntake;
@@ -123,7 +125,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new InstantCommand();
+    return new AutonomoMain(chassis, m_intake);
   }
 }
 
