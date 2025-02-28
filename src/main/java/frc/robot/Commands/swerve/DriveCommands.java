@@ -19,8 +19,6 @@ import frc.robot.Subsystems.Drive.swerve;
 
 import java.util.function.DoubleSupplier;
 
-
-
 public class DriveCommands {
 
   private static final double DEADBAND = 0.1;
@@ -28,21 +26,15 @@ public class DriveCommands {
   private DriveCommands() {}
 
   private static Translation2d getLinearVelocityFromJoysticks(double x, double y) {
-    // Apply deadband
-    double linearMagnitude = MathUtil.applyDeadband(Math.hypot(x, y), DEADBAND);
+    double linearMagnitude = Math.hypot(x, y);
+    linearMagnitude = MathUtil.applyDeadband(linearMagnitude, DEADBAND);
     Rotation2d linearDirection = new Rotation2d(Math.atan2(y, x));
-
-    // Square magnitude for more precise control
     linearMagnitude = QoLUtil.square(linearMagnitude);
-
-    // Return new linear velocity
     return new Pose2d(new Translation2d(), linearDirection)
         .transformBy(new Transform2d(linearMagnitude, 0.0, new Rotation2d()))
         .getTranslation();
   }
 
-   //Field relative drive command using two joysticks (controlling linear and angular velocities).
-   
   public static Command joystickDrive(
       swerve drive,
       DoubleSupplier xSupplier,
@@ -52,55 +44,44 @@ public class DriveCommands {
       DoubleSupplier L2) {
     return Commands.run(
         () -> {
-          // Apply deadband
-
-          Translation2d linearVelocity = getLinearVelocityFromJoysticks((xSupplier.getAsDouble()), (ySupplier.getAsDouble()));
-          double omega = MathUtil.applyDeadband((omegaSupplier.getAsDouble()), DEADBAND);
-
-          // Square values
+          Translation2d linearVelocity = getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
+          double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
           omega = Math.copySign(QoLUtil.square(omega), omega);
-
-          SmartDashboard.putNumber("XLINEAR FINAL",(linearVelocity.getX()*(2+R2.getAsDouble())));
-
-          ChassisSpeeds speeds =
-              new ChassisSpeeds(
-                  (-(linearVelocity.getX()*(2+R2.getAsDouble()) * drive.getMaxLinearSpeedMetersPerSec())),
-                  (-(linearVelocity.getY()*(2+R2.getAsDouble()))* drive.getMaxLinearSpeedMetersPerSec()),
-                  (omega*(2+R2.getAsDouble())) * drive.getMaxAngularSpeedRadPerSec());
-          boolean isFlipped =
-              DriverStation.getAlliance().isPresent()
+          ChassisSpeeds speeds = new ChassisSpeeds(
+                  ((((linearVelocity.getX() * (2 + R2.getAsDouble()))*((-L2.getAsDouble()+1)/2)) * drive.getMaxLinearSpeedMetersPerSec())),
+                  ((((linearVelocity.getY() * (2 + R2.getAsDouble()))*((-L2.getAsDouble()+1)/2)) * drive.getMaxLinearSpeedMetersPerSec())),
+                  (((omega * (2 + R2.getAsDouble())))*((-L2.getAsDouble()+1)/2) * drive.getMaxAngularSpeedRadPerSec()));
+          boolean isFlipped = DriverStation.getAlliance().isPresent()
                   && DriverStation.getAlliance().get() == Alliance.Red;
           drive.runVelocity(
               ChassisSpeeds.fromFieldRelativeSpeeds(
                   speeds,
                   isFlipped
-                      ? drive.getRotation().plus(new Rotation2d(Math.PI))
-                      : drive.getRotation()));
+                      ? drive.getPose().getRotation().plus(new Rotation2d(Math.PI))
+                      : drive.getPose().getRotation()));
         },
         drive);
   }
 
   public static Command brake(swerve drive){
-        return Commands.run(()->{
-            
-            drive.stopWithX();
-            
-        }, drive);
+    return Commands.run(() -> {
+        drive.stopWithX();
+    }, drive);
   }
 
   public static Command moveInX(swerve drive, double speed){
-        return Commands.run(()-> {
-            drive.runVelocity(new ChassisSpeeds(0, speed, 0));
-        }, drive);
+    return Commands.run(() -> {
+        drive.runVelocity(new ChassisSpeeds(0, speed, 0));
+    }, drive);
   }
 
   public static Command moveInY(swerve drive, double speed){
-    return Commands.run(()-> {
-        drive.runVelocity(new ChassisSpeeds(speed,0, 0));
+    return Commands.run(() -> {
+        drive.runVelocity(new ChassisSpeeds(speed, 0, 0));
     }, drive);
-}
+  }
 
-    public static Command testDrive(
+  public static Command testDrive(
       swerve drive,
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
@@ -108,32 +89,24 @@ public class DriveCommands {
       double MAX_LINEAR_SPEED) {
     return Commands.run(
         () -> {
-          // Apply deadband
           Translation2d linearVelocity = getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
-
           double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
-
-          // Square values
           omega = Math.copySign(QoLUtil.square(omega), omega);
-
-          ChassisSpeeds speeds =
-              new ChassisSpeeds(
+          ChassisSpeeds speeds = new ChassisSpeeds(
                   linearVelocity.getX() * MAX_LINEAR_SPEED,
                   linearVelocity.getY() * MAX_LINEAR_SPEED,
                   omega * MAX_LINEAR_SPEED / measures.DRIVE_BASE_RADIUS);
-          boolean isFlipped =
-              DriverStation.getAlliance().isPresent()
+          boolean isFlipped = DriverStation.getAlliance().isPresent()
                   && DriverStation.getAlliance().get() == Alliance.Red;
           drive.runTestVelocity(
               ChassisSpeeds.fromFieldRelativeSpeeds(
                   speeds,
                   isFlipped
-                      ? drive.getRotation().plus(new Rotation2d(Math.PI))
-                      : drive.getRotation()), MAX_LINEAR_SPEED);
+                      ? drive.getPose().getRotation().plus(new Rotation2d(Math.PI))
+                      : drive.getPose().getRotation()), MAX_LINEAR_SPEED);
         },
         drive);
   }
-
-    
 }
+
   

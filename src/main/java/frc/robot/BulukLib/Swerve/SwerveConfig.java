@@ -17,24 +17,21 @@ public class SwerveConfig{
         public static final double WHEELDIAMETER = Units.inchesToMeters(4.0);
         public static final double TRACK_WIDTH_X = 0.30; 
         public static final double TRACK_WIDTH_Y = 0.305;
-        public static final double robotMassKg = 57.45; 
-        public static final double robotMOI = 5.16;  
+        public static final double robotMassKg = 46; 
+        public static final double robotMOI = 4.5;  //5.16
         public static final double wheelCOF = 1.0;
 
         public static final double DRIVE_BASE_RADIUS =
             Math.hypot(TRACK_WIDTH_X / 2.0, TRACK_WIDTH_Y / 2.0);
-           
     }
 
     public class currentLimiting{
         public static final int driveCurrentLimit = 40; 
         public static final int turnCurrentLimit = 20;
-        
     }
 
     public class reductions{
-        public static final double DriveReduction = 5.36;
+        public static final double DriveReduction = 5.9;
         public static final double TurnReduction = 18.75;  
     }
-
 }
