@@ -48,9 +48,9 @@ public class DriveCommands {
           double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
           omega = Math.copySign(QoLUtil.square(omega), omega);
           ChassisSpeeds speeds = new ChassisSpeeds(
-                  ((((linearVelocity.getX() * (2 + R2.getAsDouble()))/(2+L2.getAsDouble())) * drive.getMaxLinearSpeedMetersPerSec())),
-                  ((((linearVelocity.getY() * (2 + R2.getAsDouble()))/(2+L2.getAsDouble())) * drive.getMaxLinearSpeedMetersPerSec())),
-                  (((omega * (2 + R2.getAsDouble()))/(2+L2.getAsDouble())) * drive.getMaxAngularSpeedRadPerSec()));
+                  ((((linearVelocity.getX() * (2 + R2.getAsDouble()))*((-L2.getAsDouble()+1)/2)) * drive.getMaxLinearSpeedMetersPerSec())),
+                  ((((linearVelocity.getY() * (2 + R2.getAsDouble()))*((-L2.getAsDouble()+1)/2)) * drive.getMaxLinearSpeedMetersPerSec())),
+                  (((omega * (2 + R2.getAsDouble())))*((-L2.getAsDouble()+1)/2) * drive.getMaxAngularSpeedRadPerSec()));
           boolean isFlipped = DriverStation.getAlliance().isPresent()
                   && DriverStation.getAlliance().get() == Alliance.Red;
           drive.runVelocity(
