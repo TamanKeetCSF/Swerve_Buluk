@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 
+
 public class SwerveConstants {
    
     public static final double DRIVE_GEAR_RATIO = 5.9;
@@ -31,9 +32,9 @@ public class SwerveConstants {
     public static final double STEER_I = 0.000005;
     public static final double STEER_D = 0.00000;
 
+
     public static final Translation2d FRONT_LEFT_POSITION = new Translation2d(0.30, 0.305);
     public static final Translation2d FRONT_RIGHT_POSITION = new Translation2d(0.30, -0.305);
     public static final Translation2d BACK_LEFT_POSITION = new Translation2d(-0.30, 0.305);
     public static final Translation2d BACK_RIGHT_POSITION = new Translation2d(-0.30, -0.305);
 }
-
