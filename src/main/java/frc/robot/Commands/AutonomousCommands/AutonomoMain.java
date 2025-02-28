@@ -4,29 +4,29 @@
 
 package frc.robot.Commands.AutonomousCommands;
 
+import java.security.Timestamp;
+
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Commands.IntakeCommands.SetIntakeComer;
+import frc.robot.Commands.swerve.AutoDrive;
+import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.Drive.swerve;
 
-public class AutonomoMain extends Command {
-  /** Creates a new AutonomoMain. */
-  public AutonomoMain() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class AutonomoMain extends SequentialCommandGroup {
+  public AutonomoMain(swerve drive, Intake intake){
+    addCommands(
+      new InstantCommand(() -> drive.runVelocity(new ChassisSpeeds(-0.6,0,0)), drive ),
+      new WaitCommand(03),
+      new SetIntakeComer(intake),
+      new InstantCommand(() -> drive.runVelocity(new ChassisSpeeds(0,0,0)), drive )
+      //new AutoDrive(drive,0.0)
+
+    );
+    
   }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
 }
