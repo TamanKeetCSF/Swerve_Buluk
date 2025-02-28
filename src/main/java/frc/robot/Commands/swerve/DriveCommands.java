@@ -64,8 +64,8 @@ public class DriveCommands {
 
           ChassisSpeeds speeds =
               new ChassisSpeeds(
-                  (linearVelocity.getX()*(2+R2.getAsDouble()) * drive.getMaxLinearSpeedMetersPerSec()),
-                  (linearVelocity.getY()*(2+R2.getAsDouble()))* drive.getMaxLinearSpeedMetersPerSec(),
+                  (-(linearVelocity.getX()*(2+R2.getAsDouble()) * drive.getMaxLinearSpeedMetersPerSec())),
+                  (-(linearVelocity.getY()*(2+R2.getAsDouble()))* drive.getMaxLinearSpeedMetersPerSec()),
                   (omega*(2+R2.getAsDouble())) * drive.getMaxAngularSpeedRadPerSec());
           boolean isFlipped =
               DriverStation.getAlliance().isPresent()

@@ -7,19 +7,19 @@ public class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
     public static final double MaxElevatorSpeed = 0.4;
-    public static final double MaxArmSpeed = 0.2;
+    public static final double MaxArmSpeed = 0.07;
 
-    public static final double MaxElevatorPosition = -150;
+    public static final double MaxElevatorPosition = -190;
     public static final double MinElevatorPosition = 0;
 
     public static final double DesiredMaxElevatorPosition = -100;
     public static final double DesiredMinElevatorPosition = -4;
 
-    public static final double MaxArmPosition = 336;
+    public static final double MaxArmPosition = 80;
     public static final double MinArmPosition = 5;
 
-    public static final double DesiredPonerCoral = 45;
-    public static final double DesiredMinArmPosition = 5;
+    public static final double DesiredPonerCoral = 70;
+    public static final double DesiredComer = 50;
   }
 
   public class DriveConstants {

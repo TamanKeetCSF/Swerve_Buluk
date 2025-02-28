@@ -28,13 +28,13 @@ public class ManualSetElevator extends Command {
   public void execute() {
     //if(!elevator.IsElevatorMax() && !elevator.IsElevatorMin())
     double potencia = -controller.getLeftY();
-    System.out.println("minimo alcanzado" + elevator.IsElevatorMin());
+    //System.out.println("minimo alcanzado" + elevator.IsElevatorMin());
     //System.out.println("maximo alcanzado" + elevator.IsElevatorMax());
-    //System.out.println("angulo elevador"+ elevator.getElevatorPosition());
+    System.out.println("angulo elevador"+ elevator.getElevatorPosition());
 
    
     // este codigo iba en la condicion de abajo(elevator.getElevatorPosition() > Constants.OperatorConstants.MinElevatorPosition && potencia <= 0) || (elevator.getElevatorPosition() < Constants.OperatorConstants.MaxElevatorPosition && potencia >= 0)
-    elevator.resetEncoderButton();
+    //elevator.resetEncoderButton();
     if((elevator.IsElevatorMin() || elevator.IsElevatorMinEncoder()) && potencia <= 0){
       elevator.setElevator(0);
       
@@ -43,7 +43,7 @@ public class ManualSetElevator extends Command {
       elevator.setElevator(0);
     }
     else{
-      elevator.setElevator(potencia*0.3);
+      elevator.setElevator(potencia*0.75);
     }
       
   }

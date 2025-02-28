@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.Commands.ElevatorCommands.ManualSetElevator;
 import frc.robot.Commands.IntakeCommands.ManualSetIntake;
+import frc.robot.Commands.IntakeCommands.SetIntakeComer;
 import frc.robot.Commands.HangingCommands.hangCommand;
 import frc.robot.Commands.IntakeCommands.SetIntakeMax;
 import frc.robot.Commands.swerve.DriveCommands;
@@ -91,8 +92,9 @@ public class RobotContainer {
 
 
        button2A.onTrue(new SetIntakeMax(m_intake)); 
-      button2B.onTrue(new InstantCommand(() -> m_intake.ponerAngulo(40)));
-      button2X.onTrue(new InstantCommand(() -> m_intake.ponerAngulo(170)));
+       button2B.onTrue(new SetIntakeComer(m_intake)); 
+      //button2B.onTrue(new InstantCommand(() -> m_intake.ponerAngulo(40)));
+      //button2X.onTrue(new InstantCommand(() -> m_intake.ponerAngulo(170)));
 
       rightTrigger.onTrue(new InstantCommand(() -> m_intake.Comer(),m_intake))
       .onFalse(new InstantCommand(() -> m_intake.DejarComer(),m_intake));

@@ -64,25 +64,25 @@ public class Intake extends SubsystemBase {
   }
 
   public double getArmAngle() {
-    return encoderArm.getPosition() / TICKS_PER_DEGREE;
+    return encoderArm.getPosition(); // TICKS_PER_DEGREE;
   }
 
   public void Comer(){
-    Intake.set(0.3);
+    Intake.set(0.25);
   }
   public void DesComer(){
-    Intake.set(-0.3);
+    Intake.set(-0.6);
   }
   public void DejarComer(){
     Intake.set(0);
   }
 
   public boolean IsIntakeMax(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.MaxArmPosition) < 8);
+    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.MaxArmPosition) < 10);
   }
 
-  public boolean IsIntakeMaxDesired(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredPonerCoral) < 8);
+  public boolean IsIntakeComerDesired(){
+    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredComer) < 10);
   }
 
 }
