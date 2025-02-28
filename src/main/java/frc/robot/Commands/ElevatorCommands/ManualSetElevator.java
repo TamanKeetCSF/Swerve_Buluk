@@ -43,7 +43,7 @@ public class ManualSetElevator extends Command {
       elevator.setElevator(0);
     }
     else{
-      elevator.setElevator(potencia*0.75);
+      elevator.setElevator(potencia*0.85);
     }
       
   }

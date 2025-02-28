@@ -78,11 +78,13 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean IsIntakeMax(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.MaxArmPosition) < 10);
+    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredPonerCoral) < 1.5);
   }
-
   public boolean IsIntakeComerDesired(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredComer) < 10);
+    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredComer) < 1.5);
+  }
+  public boolean IsIntakeArriba(){
+    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredPonerArriba) < 1.5);
   }
 
 }
