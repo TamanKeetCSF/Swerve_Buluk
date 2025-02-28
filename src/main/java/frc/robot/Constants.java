@@ -7,7 +7,7 @@ public class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
     public static final double MaxElevatorSpeed = 0.4;
-    public static final double MaxArmSpeed = 0.45;
+    public static final double MaxArmSpeed = 0.5;
 
     public static final double MaxElevatorPosition = -190;
     public static final double MinElevatorPosition = 0;

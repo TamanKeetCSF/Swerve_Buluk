@@ -20,7 +20,7 @@ public class AutonomoMain extends SequentialCommandGroup {
   public AutonomoMain(swerve drive, Intake intake){
     addCommands(
       new InstantCommand(() -> drive.runVelocity(new ChassisSpeeds(-0.6,0,0)), drive ),
-      new WaitCommand(03),
+      new WaitCommand(3.5),
       new SetIntakeComer(intake),
       new InstantCommand(() -> drive.runVelocity(new ChassisSpeeds(0,0,0)), drive )
       //new AutoDrive(drive,0.0)
