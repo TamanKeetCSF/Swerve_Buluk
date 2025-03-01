@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.AutonomousCommands.AutonomoMain;
+import frc.robot.Commands.AutonomousCommands.setPonerArriba;
+import frc.robot.Commands.AutonomousCommands.setPonerAbajo;
+import frc.robot.Commands.AutonomousCommands.setComer;
 import frc.robot.Commands.ElevatorCommands.ManualSetElevator;
 import frc.robot.Commands.IntakeCommands.ManualSetIntake;
 
@@ -25,6 +28,7 @@ import frc.robot.Commands.IntakeCommands.PonerArriba;
 import frc.robot.Commands.swerve.DriveCommands;
 
 import frc.robot.Subsystems.BallIntake;
+
 import frc.robot.Subsystems.Hanger;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Drive.swerve;
@@ -93,10 +97,9 @@ public class RobotContainer {
 
       //intake
 
-
-       button2A.onTrue(new SetIntakeMax(m_intake)); 
-       button2B.onTrue(new SetIntakeComer(m_intake)); 
-       button2X.onTrue(new PonerArriba(m_intake)); 
+       button2A.onTrue(new setComer(m_intake,m_elevador)); 
+       button2B.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
+       button2Y.onTrue(new setPonerArriba(m_intake, m_elevador)); 
 
       rightTrigger.onTrue(new InstantCommand(() -> m_intake.Comer(),m_intake))
       .onFalse(new InstantCommand(() -> m_intake.DejarComer(),m_intake));

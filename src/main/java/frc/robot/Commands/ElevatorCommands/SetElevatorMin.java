@@ -37,7 +37,7 @@ public class SetElevatorMin extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return elevator.IsElevatorMinDesired();
+    return elevator.IsElevatorMinDesired() || elevator.IsElevatorMin();
 }
 }
 

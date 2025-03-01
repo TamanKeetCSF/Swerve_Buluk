@@ -27,11 +27,11 @@ public class BallIntake extends SubsystemBase {
     }
   
     public void marcoSube() {
-      m_marco.set(0.75);  
+      m_marco.set(0.85);  
   }
   
   public void marcoBaja() {
-      m_marco.set(-0.75);  
+      m_marco.set(-0.85);  
   }
   
   public void marcoStop() {
@@ -40,11 +40,11 @@ public class BallIntake extends SubsystemBase {
   }
 
   public void ballIntakeComer() {
-    m_ballIntake.set(-0.3);  
+    m_ballIntake.set(-0.4);  
 }
 
 public void ballIntakeSacar() {
-    m_ballIntake.set(0.3);  
+    m_ballIntake.set(0.4);  
 }
 
 public void ballIntakeStop() {
