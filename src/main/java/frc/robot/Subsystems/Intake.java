@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  private final SparkMax muneca = new SparkMax(3, MotorType.kBrushless);
-  private final SparkMax Intake = new SparkMax(4, MotorType.kBrushed);
+  private final SparkMax muneca = new SparkMax(Constants.idMotorConstants.ID_ArmMotor, MotorType.kBrushless);
+  private final SparkMax Intake = new SparkMax(Constants.idMotorConstants.ID_Intake, MotorType.kBrushed);
   private RelativeEncoder encoderArm;
   private PIDController PIDMuneca;
 

@@ -4,12 +4,20 @@ import frc.robot.BulukLib.MotionControllers.Gains.Gains;
 
 public class Constants {
 
+  public static class controlConstants {
+    public static final int DriverControllerPort = 0;
+    public static final int MechanismsControllerPort = 1;
+    public static final int LogitecButtonA = 1;
+    public static final int LogitecButtonB = 2;  
+
+  }
+
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+   
     public static final double MaxElevatorSpeed = 0.70;
     public static final double MaxArmSpeed = 0.45;
 
-    public static final double MaxElevatorPosition = -190;
+    public static final double MaxElevatorPosition = -180;
     public static final double MinElevatorPosition = 0;
 
     public static final double DesiredMaxElevatorPosition = -180;
@@ -65,4 +73,19 @@ public class Constants {
     public static final int MAGNETICSENSOR_DIGITAL_INPUT_PORT = 3;
     public static final int MECHANICALSWITCH_DIGITAL_INPUT_PORT = 0;
   }
+
+  public static class idMotorConstants {
+    public static final int ID_Elevator = 1;
+    public static final int ID_Hanger = 2;
+
+    public static final int ID_ArmMotor = 3;
+    public static final int ID_Intake = 4;
+
+    public static final int ID_Marco = 5;
+    public static final int ID_BallIntake = 6;
+    
+
+  }
+
+
 }

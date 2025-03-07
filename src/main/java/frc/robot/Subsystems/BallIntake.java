@@ -9,6 +9,7 @@ import com.revrobotics.spark.*;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class BallIntake extends SubsystemBase {
     /** Creates a new Elevator. */
@@ -16,8 +17,8 @@ public class BallIntake extends SubsystemBase {
     private final SparkMax m_ballIntake;
       // Add encoders
       public BallIntake() {
-          m_marco = new SparkMax(5, MotorType.kBrushless);
-          m_ballIntake = new SparkMax(6, MotorType.kBrushed);
+          m_marco = new SparkMax(Constants.idMotorConstants.ID_Marco, MotorType.kBrushless);
+          m_ballIntake = new SparkMax(Constants.idMotorConstants.ID_BallIntake, MotorType.kBrushed);
           
       }
   
@@ -27,11 +28,11 @@ public class BallIntake extends SubsystemBase {
     }
   
     public void marcoSube() {
-      m_marco.set(0.85);  
+      m_marco.set(0.95);  
   }
   
   public void marcoBaja() {
-      m_marco.set(-0.85);  
+      m_marco.set(-0.95);  
   }
   
   public void marcoStop() {

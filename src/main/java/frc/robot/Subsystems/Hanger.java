@@ -12,6 +12,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
 public class Hanger extends SubsystemBase {
@@ -19,7 +20,7 @@ public class Hanger extends SubsystemBase {
     private final SparkMax m_hanger;
       // Add encoders
       public Hanger() {
-          m_hanger = new SparkMax(2, MotorType.kBrushless);
+          m_hanger = new SparkMax(Constants.idMotorConstants.ID_Hanger, MotorType.kBrushless);
           
          
       }

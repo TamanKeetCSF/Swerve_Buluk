@@ -37,12 +37,14 @@ import frc.robot.Subsystems.Elevator;
 
 public class RobotContainer {
 
+
+  /////INICIALIZACION//////
+  /// AQUI SE INICIALIZAN LOS SUBSISTEMAS QUE VA A LLAMAR EL ROBOT
+  /// 
   swerve chassis = new swerve();
-
-  CommandPS5Controller driver = new CommandPS5Controller(0);
-  private final PS5Controller Player1Controller = new PS5Controller(0);
-  private final XboxController Player2Controller = new XboxController(1);
-
+  CommandPS5Controller driver = new CommandPS5Controller(Constants.controlConstants.DriverControllerPort);
+  private final PS5Controller Player1Controller = new PS5Controller(Constants.controlConstants.DriverControllerPort);
+  private final XboxController Player2Controller = new XboxController(Constants.controlConstants.MechanismsControllerPort);
   private final Elevator m_elevador = new Elevator();
   private final Hanger m_colgador = new Hanger();
   private final BallIntake m_bola = new BallIntake();
@@ -51,7 +53,7 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    
+  ////AQUI LLAMAMOS A LAS INTRUCCIONES QUE SEGUIRA EL ROBOT TODO EL TIEMPO DURANTE EL TELE OP
    
     configureBindings();
     
@@ -128,6 +130,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
+     ////AQUI LLAMAMOS A LAS INTRUCCIONES QUE SEGUIRA EL ROBOT DURANTE EL AUTONOMO
     return new AutonomoMain(chassis, m_intake);
   }
 }

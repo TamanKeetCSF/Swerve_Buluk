@@ -24,7 +24,7 @@ public class Elevator extends SubsystemBase {
 
     // Add encoders
     public Elevator() {
-        m_elevator = new SparkMax(1, MotorType.kBrushless);
+        m_elevator = new SparkMax(Constants.idMotorConstants.ID_Elevator, MotorType.kBrushless);
        
         limitMechanicalSwitch = new DigitalInput(SensorConstants.MECHANICALSWITCH_DIGITAL_INPUT_PORT);
         limitMagneticSwitch = new DigitalInput(SensorConstants.MAGNETICSENSOR_DIGITAL_INPUT_PORT);
