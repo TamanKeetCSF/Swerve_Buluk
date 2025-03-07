@@ -30,7 +30,7 @@ public class ManualSetIntake extends Command {
     double potencia = -controller.getRightX();
     //System.out.println("minimo alcanzado" + elevator.IsElevatorMin());
     //System.out.println("maximo alcanzado" + elevator.IsElevatorMax());
-    System.out.println("angulo intake"+ intake.getArmAngle());
+   // System.out.println("angulo intake"+ intake.getArmAngle());
 
    
     

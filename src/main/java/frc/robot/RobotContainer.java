@@ -25,6 +25,7 @@ import frc.robot.Commands.HangingCommands.hangCommand;
 import frc.robot.Commands.IntakeCommands.SetIntakeMax;
 import frc.robot.Commands.IntakeCommands.SetIntakeComer;
 import frc.robot.Commands.IntakeCommands.PonerArriba;
+import frc.robot.Commands.swerve.AutoAlignAprilTag;
 import frc.robot.Commands.swerve.DriveCommands;
 
 import frc.robot.Subsystems.BallIntake;
@@ -56,8 +57,10 @@ public class RobotContainer {
   ////AQUI LLAMAMOS A LAS INTRUCCIONES QUE SEGUIRA EL ROBOT TODO EL TIEMPO DURANTE EL TELE OP
    
     configureBindings();
-    
+    //chassis.setDefaultCommand(new AutoAlignAprilTag(chassis));
     chassis.setDefaultCommand(
+
+    
       DriveCommands.joystickDrive(
         chassis,
         ()-> driver.getLeftY() * 0.5,
@@ -96,12 +99,14 @@ public class RobotContainer {
       Trigger rightTrigger = new Trigger(() -> Player2Controller.getRawAxis(3) > 0.4); // Right trigger
 
           //bindings subsistemas
-
+//Swerves
+    button1A.whileTrue(new AutoAlignAprilTag(chassis));
       //intake
 
        button2A.onTrue(new setComer(m_intake,m_elevador)); 
        button2B.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
        button2Y.onTrue(new setPonerArriba(m_intake, m_elevador)); 
+
 
       rightTrigger.onTrue(new InstantCommand(() -> m_intake.Comer(),m_intake))
       .onFalse(new InstantCommand(() -> m_intake.DejarComer(),m_intake));
