@@ -11,12 +11,12 @@ public class AutoAlignAprilTag extends Command {
     
     // Controladores PID 
     private final PIDController rotationController = new PIDController(0.05, 0.0, 0.0);
-    private final PIDController forwardController = new PIDController(0.5, 0.0, 0.0);
+    private final PIDController forwardController = new PIDController(1.5, 1.15, 1.4);
     
     // Angulos de la limelight
     private static final double LIMELIGHT_MOUNTING_ANGLE = Math.toRadians(30.0); // Angulo de montado de la camara en radianes
-    private static final double LIMELIGHT_HEIGHT = 0.85;   // Camara  altura en metros
-    private static final double TARGET_HEIGHT = 0.7;      // AprilTag altura en metros
+    private static final double LIMELIGHT_HEIGHT = 0.67;   // Camara  altura en metros
+    private static final double TARGET_HEIGHT = 0.5;      // AprilTag altura en metros
     
     // distancia deseada atras del limelight
     private static final double DESIRED_DISTANCE = 4 * 0.0254; 
@@ -72,7 +72,7 @@ public class AutoAlignAprilTag extends Command {
         
         // Manejo robot, hacia delante o atras (x) y rotacion (z).
         // Se asume que el robot ya esta viendo hacia el objetivo
-        drive.runVelocity(new ChassisSpeeds(forwardOutput, 0, rotationOutput));
+        drive.runVelocity(new ChassisSpeeds(-forwardOutput, 0, -rotationOutput));
     }
     
     @Override
