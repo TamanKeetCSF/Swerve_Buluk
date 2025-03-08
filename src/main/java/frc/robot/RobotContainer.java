@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+
 import edu.wpi.first.wpilibj.PS5Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,8 +21,8 @@ import frc.robot.Commands.AutonomousCommands.setPonerAbajo;
 import frc.robot.Commands.AutonomousCommands.setComer;
 import frc.robot.Commands.ElevatorCommands.ManualSetElevator;
 import frc.robot.Commands.IntakeCommands.ManualSetIntake;
-
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.HangingCommands.hangCommand;
 import frc.robot.Commands.IntakeCommands.SetIntakeMax;
 import frc.robot.Commands.IntakeCommands.SetIntakeComer;
@@ -50,12 +52,12 @@ public class RobotContainer {
   private final Hanger m_colgador = new Hanger();
   private final BallIntake m_bola = new BallIntake();
   public final Intake m_intake = new Intake();
-
+  private final SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
-
+    
   ////AQUI LLAMAMOS A LAS INTRUCCIONES QUE SEGUIRA EL ROBOT TODO EL TIEMPO DURANTE EL TELE OP
-   
+    autoChooser = AutoBuilder.buildAutoChooser("autoTest");
     configureBindings();
     //chassis.setDefaultCommand(new AutoAlignAprilTag(chassis));
     chassis.setDefaultCommand(
@@ -135,8 +137,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-     ////AQUI LLAMAMOS A LAS INTRUCCIONES QUE SEGUIRA EL ROBOT DURANTE EL AUTONOMO
-    return new AutonomoMain(chassis, m_intake);
+    System.out.println("funciono");
+    return autoChooser.getSelected();
   }
-}
 
+}
