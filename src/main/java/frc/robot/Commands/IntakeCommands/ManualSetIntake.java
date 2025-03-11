@@ -27,20 +27,26 @@ public class ManualSetIntake extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double potencia = -controller.getRightX();
+    //double potencia = -controller.getRightX();
     //System.out.println("minimo alcanzado" + elevator.IsElevatorMin());
     //System.out.println("maximo alcanzado" + elevator.IsElevatorMax());
     System.out.println("angulo intake"+ intake.getArmAngle());
+    intake.actualizarMotor();
 
    
     
-
+/* 
     if((intake.getArmAngle() < Constants.OperatorConstants.MinArmPosition && potencia <= 0) || (intake.getArmAngle() > Constants.OperatorConstants.MaxArmPosition && potencia >= 0)){
     intake.setIntake(0);
     }
     else{
+<<<<<<< Updated upstream
       intake.setIntake(potencia*0.5);
     }
+=======
+      intake.setIntake(0.025);
+    }*/
+>>>>>>> Stashed changes
 
   }
 

@@ -90,6 +90,14 @@ public class RobotContainer {
 
       //intake
 
+<<<<<<< Updated upstream
+=======
+       //button2X.onTrue(new setComer(m_intake,m_elevador)); 
+       //button2A.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
+       //button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
+
+       button2X.onTrue(new InstantCommand(() -> m_intake.ponerAngulo(Constants.OperatorConstants.DesiredPonerArriba), m_intake)); 
+>>>>>>> Stashed changes
 
        button2A.onTrue(new SetIntakeMax(m_intake)); 
        button2B.onTrue(new SetIntakeComer(m_intake)); 
