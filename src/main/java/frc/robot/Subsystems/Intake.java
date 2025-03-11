@@ -15,7 +15,7 @@ public class Intake extends SubsystemBase {
   private PIDController PIDMuneca;
 
   // PID Constants
-  private static final double kP = 0.1;
+  private static final double kP = 0.05;
   private static final double kI = 0.0;
   private static final double kD = 0.0;
 
@@ -49,18 +49,17 @@ public class Intake extends SubsystemBase {
   }
 
   public void ponerAngulo(double angulo) {
-    // Convert desired angle in degrees to encoder ticks
-    setPoint = angulo * TICKS_PER_DEGREE;
+    setPoint = angulo;
     PIDMuneca.setSetpoint(setPoint);
   }
 
   public void actualizarMotor() {
-    //double currentPositionTicks = encoder.getPosition();
-    //double pidOutput = PIDMuneca.calculate(currentPositionTicks, setPoint);
-    //muneca.set(pidOutput);
-    //System.out.println("SetPoint (ticks): " + setPoint);
-    //System.out.println("Encoder Position (ticks): " + currentPositionTicks);
-    //System.out.println("Current Angle (deg): " + getCurrentAngle());
+    double currentPositionTicks = encoderArm.getPosition();
+    double pidOutput = PIDMuneca.calculate(currentPositionTicks);
+    muneca.set(pidOutput);
+    System.out.println("SetPoint (ticks): " + setPoint);
+    System.out.println("Encoder Position (ticks): " + currentPositionTicks);
+    System.out.println("Current Angle (deg): " + getArmAngle());
   }
 
   public double getArmAngle() {
@@ -76,15 +75,4 @@ public class Intake extends SubsystemBase {
   public void DejarComer(){
     Intake.set(-0.02);
   }
-
-  public boolean IsIntakeMax(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredPonerCoral) < 1.5);
-  }
-  public boolean IsIntakeComerDesired(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredComer) < 1.5);
-  }
-  public boolean IsIntakeArriba(){
-    return (Math.abs(encoderArm.getPosition()-Constants.OperatorConstants.DesiredPonerArriba) < 1.5);
-  }
-
 }

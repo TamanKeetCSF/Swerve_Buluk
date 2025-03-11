@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Commands.ElevatorCommands.SetElevatorMin;
-import frc.robot.Commands.IntakeCommands.SetIntakeComer;
-import frc.robot.Commands.IntakeCommands.SetIntakeMax;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 
@@ -22,7 +20,7 @@ public class setComer extends SequentialCommandGroup {
   public setComer(Intake intake, Elevator elevator) {
     addCommands(
       new ParallelCommandGroup(
-      new SetIntakeMax(intake),
+      new InstantCommand(() -> intake.ponerAngulo(4)),
       new SetElevatorMin(elevator))
       
       

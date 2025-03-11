@@ -5,11 +5,11 @@
 package frc.robot.Commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Commands.ElevatorCommands.SetElevatorMin;
-import frc.robot.Commands.IntakeCommands.SetIntakeComer;
-import frc.robot.Commands.IntakeCommands.SetIntakeMax;
+
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 
@@ -19,7 +19,7 @@ public class setPonerAbajo extends SequentialCommandGroup {
   public setPonerAbajo(Intake intake, Elevator elevator) {
     addCommands(
       new ParallelCommandGroup(
-      new SetIntakeComer(intake),
+      new InstantCommand(() -> intake.ponerAngulo(71)),
       new SetElevatorMin(elevator))
       
       

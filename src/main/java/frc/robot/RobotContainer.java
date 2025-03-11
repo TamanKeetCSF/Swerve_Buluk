@@ -20,13 +20,11 @@ import frc.robot.Commands.AutonomousCommands.setPonerArriba;
 import frc.robot.Commands.AutonomousCommands.setPonerAbajo;
 import frc.robot.Commands.AutonomousCommands.setComer;
 import frc.robot.Commands.ElevatorCommands.ManualSetElevator;
-import frc.robot.Commands.IntakeCommands.ManualSetIntake;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.HangingCommands.hangCommand;
-import frc.robot.Commands.IntakeCommands.SetIntakeMax;
-import frc.robot.Commands.IntakeCommands.SetIntakeComer;
-import frc.robot.Commands.IntakeCommands.PonerArriba;
+import frc.robot.Commands.IntakeCommands.mantenerPosicion;
 import frc.robot.Commands.swerve.AutoAlignAprilTag;
 import frc.robot.Commands.swerve.DriveCommands;
 
@@ -73,7 +71,7 @@ public class RobotContainer {
 
     driver.L1().whileTrue(DriveCommands.brake(chassis));
     m_elevador.setDefaultCommand(new ManualSetElevator(m_elevador, Player2Controller));
-    m_intake.setDefaultCommand(new ManualSetIntake(m_intake, Player2Controller));
+    m_intake.setDefaultCommand(new mantenerPosicion(m_intake));
     m_colgador.setDefaultCommand(new hangCommand(m_colgador, Player2Controller));
   }
 
@@ -105,9 +103,12 @@ public class RobotContainer {
     button1A.whileTrue(new AutoAlignAprilTag(chassis));
       //intake
 
-       button2X.onTrue(new setComer(m_intake,m_elevador)); 
-       button2A.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
-       button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
+       //button2X.onTrue(new setComer(m_intake,m_elevador)); 
+       //button2A.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
+       //button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
+       button2A.onTrue(new setPonerArriba(m_intake, m_elevador)); 
+       button2X.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
+       button2B.onTrue(new setComer(m_intake, m_elevador)); 
 
 
       rightTrigger.onTrue(new InstantCommand(() -> m_intake.Comer(),m_intake))
