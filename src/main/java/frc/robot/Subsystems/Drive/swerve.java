@@ -57,48 +57,48 @@ public class swerve extends SubsystemBase {
     ModuleSpark[] modules = new ModuleSpark[4];
 
     public swerve() {
-        // Instantiate modules using your ModuleSpark class
+        // Instanciar los módulos usando la clase ModuleSpark
         modules[0] = new ModuleSpark(0);
         modules[1] = new ModuleSpark(1);
         modules[2] = new ModuleSpark(2);
         modules[3] = new ModuleSpark(3);
 
-        // Configure gyro
+        // Configurar el gyro
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.getConfigurator().setYaw(0.0);
 
-        // *** NEW: Configure AutoBuilder for PathPlanner ***
+        // *** NUEVO: Configurar AutoBuilder para PathPlanner usando configuración manual ***
         try {
-            // Optionally load a RobotConfig from the GUI
-            RobotConfig config = RobotConfig.fromGUISettings();
+            // Se carga la configuración del robot de forma manual
+            RobotConfig config = getPathPlannerConfiguration();
             AutoBuilder.configure(
-                this::getPose,                // Pose supplier
-                this::resetPose,              // Reset pose method
-                this::getSpeeds,              // Chassis speeds supplier (robot-relative)
-                this::driveRobotRelative,     // Drive robot relative method
+                this::getPose,                // Proveedor de pose
+                this::resetPose,              // Método para resetear la pose
+                this::getSpeeds,              // Proveedor de velocidades (robot-relativo)
+                this::driveRobotRelative,     // Método para conducir de forma robot-relativa
                 new PPHolonomicDriveController(
                     new PIDConstants(0.05, 0, 0),
-                    new PIDConstants(5.0, 0, 0)
+                    new PIDConstants(0.05, 0, 0)
                 ),
-                config,                       // Robot configuration (loaded from GUI settings)
+                config,                       // Configuración manual del robot
                 () -> {
-                    // Flip the path if the alliance is Red.
+                    // Invierte el camino si la alianza es roja.
                     var alliance = DriverStation.getAlliance();
                     return alliance.isPresent() && alliance.get() == DriverStation.Alliance.Red;
                 },
-                this                          // Reference to this subsystem (for command requirements)
+                this                          // Referencia a este subsistema (para requisitos de comandos)
             );
         } catch(Exception e) {
             DriverStation.reportError("Failed to configure AutoBuilder", e.getStackTrace());
         }
 
-        // Optionally, put a Field2d on the dashboard for visualization (if you have one)
+        // Opcional: poner un Field2d en el dashboard para visualización (si se tiene)
         SmartDashboard.putData("Field", new edu.wpi.first.wpilibj.smartdashboard.Field2d());
     }
 
     @Override
     public void periodic() {
-        // Update each module periodically
+        // Actualizar cada módulo periódicamente
         for (var module : modules) {
             module.periodic();
         }
@@ -108,7 +108,7 @@ public class swerve extends SubsystemBase {
             }
         }
 
-        // Log module measurements
+        // Registro de mediciones de los módulos
         double[] meters = new double[4];
         double[] metersPerSec = new double[4];
         double[] metersTest = new double[4];
@@ -139,7 +139,7 @@ public class swerve extends SubsystemBase {
         SmartDashboard.putNumberArray("METERSPERSECOND", metersPerSec);
         SmartDashboard.putNumberArray("OSITOS", ositos);
 
-        // Compute module positions and update odometry
+        // Calcular posiciones de los módulos y actualizar la odometría
         SwerveModulePosition[] modulePositions = getModulePositions();
         SwerveModulePosition[] moduleDeltas = new SwerveModulePosition[4];
         for (int i = 0; i < 4; i++) {
@@ -149,7 +149,7 @@ public class swerve extends SubsystemBase {
             lastModulePositions[i] = modulePositions[i];
         }
 
-        // Update gyro reading: if connected use the Pigeon2 reading, otherwise integrate module deltas.
+        // Actualizar la lectura del gyro: si está conectado se usa el valor del Pigeon2, de lo contrario se integra a partir de los deltas.
         if (gyro.isConnected()) {
             rawGyroRotation = getPigeonRotation();
         } else {
@@ -158,7 +158,7 @@ public class swerve extends SubsystemBase {
         }
         SmartDashboard.putNumber("Pigeon2", getAngle());
 
-        // Update the odometry based on current gyro and module positions.
+        // Actualizar la odometría según el gyro y las posiciones de los módulos.
         poseEstimator.update(rawGyroRotation, modulePositions);
     }
 
@@ -183,7 +183,7 @@ public class swerve extends SubsystemBase {
         return kinematics.toChassisSpeeds(getModuleStates());
     }
 
-    // Command the robot to drive with a given velocity.
+    // Comanda al robot para conducir con una velocidad dada.
     public void runVelocity(ChassisSpeeds speeds) {
         ChassisSpeeds discreteSpeeds = ChassisSpeeds.discretize(speeds, 0.02);
         SwerveModuleState[] setpointStates = kinematics.toSwerveModuleStates(discreteSpeeds);
@@ -232,26 +232,26 @@ public class swerve extends SubsystemBase {
         return positions;
     }
 
-    // --- Methods for PathPlanner integration ---
-    // Return the current estimated pose.
+    // --- Métodos para la integración con PathPlanner ---
+    // Devuelve la pose estimada actual.
     public Pose2d getPose() {
         return poseEstimator.getEstimatedPosition();
     }
 
-    // Reset odometry with a new starting pose.
+    // Resetea la odometría con una nueva pose de inicio.
     public void resetPose(Pose2d pose) {
         poseEstimator.resetPosition(rawGyroRotation, getModulePositions(), pose);
     }
 
-    // Return current chassis speeds from module states.
+    // Devuelve las velocidades del chasis a partir de los estados de los módulos.
     public ChassisSpeeds getSpeeds() {
         return kinematics.toChassisSpeeds(getModuleStates());
     }
 
-    // Drive using robot-relative speeds. Here we convert field-relative speeds to robot-relative.
+    // Conduce utilizando velocidades robot-relative. Se convierten las velocidades de campo a robot-relativas.
     public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
         ChassisSpeeds fieldRelative = ChassisSpeeds.fromFieldRelativeSpeeds(robotRelativeSpeeds, getPose().getRotation());
-        runVelocity(fieldRelative);
+        runVelocity(robotRelativeSpeeds);
     }
 
     public Double getX() {
@@ -270,23 +270,41 @@ public class swerve extends SubsystemBase {
         poseEstimator.resetPosition(rawGyroRotation, getModulePositions(), pose);
     }
 
-    // Returns maximum linear speed in meters per second.
+    // Devuelve la velocidad lineal máxima en metros por segundo.
     public double getMaxLinearSpeedMetersPerSec() {
         return 5.2;
     }
 
-    // Returns maximum angular speed in radians per second.
+    // Devuelve la velocidad angular máxima en radianes por segundo.
     public double getMaxAngularSpeedRadPerSec() {
         return MAX_ANGULAR_SPEED;
     }
 
-    // For vision-based updates: add a vision observation with a standard deviation.
+    // Para actualizaciones basadas en visión: añadir una observación con una desviación estándar.
     public void addObservationStd(Pose2d pose, double timeStamps, Matrix<N3, N1> std) {
         poseEstimator.addVisionMeasurement(pose, timeStamps, std);
     }
 
-    // For vision-based updates: add a vision observation without standard deviation.
+    // Para actualizaciones basadas en visión: añadir una observación sin desviación estándar.
     public void addObservation(Pose2d pose, double timeStamps) {
         poseEstimator.addVisionMeasurement(pose, timeStamps);
     }
+    
+    // *** Método para definir manualmente la configuración del robot para PathPlanner ***
+    public RobotConfig getPathPlannerConfiguration() {
+        return new RobotConfig(
+            measures.robotMassKg,
+            measures.robotMOI,
+            new ModuleConfig(
+                measures.WHEELRADIUS,
+                getMaxLinearSpeedMetersPerSec(),
+                1.0,
+                DCMotor.getNEO(1).withReduction(reductions.DriveReduction),
+                currentLimiting.driveCurrentLimit,
+                1
+            ),
+            getModuleTranslations()
+        );
+    }
 }
+
