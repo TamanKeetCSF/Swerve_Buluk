@@ -250,8 +250,8 @@ public class swerve extends SubsystemBase {
 
     // Drive using robot-relative speeds. Here we convert field-relative speeds to robot-relative.
     public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
-        //ChassisSpeeds fieldRelative = ChassisSpeeds.fromFieldRelativeSpeeds(robotRelativeSpeeds, getPose().getRotation());
-        runVelocity(robotRelativeSpeeds);
+        ChassisSpeeds fieldRelative = ChassisSpeeds.fromFieldRelativeSpeeds(robotRelativeSpeeds, getPose().getRotation());
+        runVelocity(fieldRelative);
     }
 
     public Double getX() {
