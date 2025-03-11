@@ -78,7 +78,7 @@ public class swerve extends SubsystemBase {
                 this::driveRobotRelative,     // Método para conducir de forma robot-relativa
                 new PPHolonomicDriveController(
                     new PIDConstants(0.05, 0, 0),
-                    new PIDConstants(0.05, 0, 0)
+                    new PIDConstants(0.3, 0, 0)
                 ),
                 config,                       // Configuración manual del robot
                 () -> {

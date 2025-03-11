@@ -22,7 +22,7 @@ public class SwerveConfig{
         public static final double wheelCOF = 1.0;
 
         public static final double DRIVE_BASE_RADIUS =
-            Math.hypot(TRACK_WIDTH_X / 2.0, TRACK_WIDTH_Y / 2.0);
+            Math.hypot(TRACK_WIDTH_X, TRACK_WIDTH_Y);
            
     }
 
@@ -33,7 +33,7 @@ public class SwerveConfig{
     }
 
     public class reductions{
-        public static final double DriveReduction = 5.36;
+        public static final double DriveReduction = 5.9;
         public static final double TurnReduction = 18.75;  
     }
 
