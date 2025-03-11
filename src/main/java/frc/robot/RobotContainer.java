@@ -65,9 +65,9 @@ public class RobotContainer {
     
       DriveCommands.joystickDrive(
         chassis,
-        ()-> driver.getLeftY() * 0.5,
-        ()-> driver.getLeftX() * 0.5,
-        ()-> driver.getRightX() * 0.5,
+        ()-> driver.getLeftY() * 0.7,
+        ()-> driver.getLeftX() * 0.7,
+        ()-> driver.getRightX() * 0.7,
         ()-> Player1Controller.getR2Axis(),
         ()-> Player1Controller.getL2Axis()));
 
@@ -105,9 +105,9 @@ public class RobotContainer {
     button1A.whileTrue(new AutoAlignAprilTag(chassis));
       //intake
 
-       button2A.onTrue(new setComer(m_intake,m_elevador)); 
-       button2B.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
-       button2Y.onTrue(new setPonerArriba(m_intake, m_elevador)); 
+       button2X.onTrue(new setComer(m_intake,m_elevador)); 
+       button2A.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
+       button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
 
 
       rightTrigger.onTrue(new InstantCommand(() -> m_intake.Comer(),m_intake))

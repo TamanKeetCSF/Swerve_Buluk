@@ -30,7 +30,7 @@ public class ManualSetIntake extends Command {
     double potencia = -controller.getRightX();
     //System.out.println("minimo alcanzado" + elevator.IsElevatorMin());
     //System.out.println("maximo alcanzado" + elevator.IsElevatorMax());
-   // System.out.println("angulo intake"+ intake.getArmAngle());
+    System.out.println("angulo intake"+ intake.getArmAngle());
 
    
     
@@ -38,8 +38,11 @@ public class ManualSetIntake extends Command {
     if((intake.getArmAngle() < Constants.OperatorConstants.MinArmPosition && potencia <= 0) || (intake.getArmAngle() > Constants.OperatorConstants.MaxArmPosition && potencia >= 0)){
     intake.setIntake(0);
     }
-    else{
+    else if (potencia != 0){
       intake.setIntake(potencia*0.35);
+    }
+    else{
+      intake.setIntake(0.025);
     }
 
   }
@@ -47,7 +50,7 @@ public class ManualSetIntake extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.setIntake(0);
+    intake.setIntake(0.0);
   }
 
   // Returns true when the command should end.

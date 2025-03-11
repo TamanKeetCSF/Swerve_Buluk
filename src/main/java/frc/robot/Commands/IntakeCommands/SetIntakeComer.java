@@ -28,7 +28,7 @@ public class SetIntakeComer extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.setIntake(0);
+    intake.setIntake(0.02);
   }
 
   // Returns true when the command should end.

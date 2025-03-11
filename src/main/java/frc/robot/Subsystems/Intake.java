@@ -68,13 +68,13 @@ public class Intake extends SubsystemBase {
   }
 
   public void Comer(){
-    Intake.set(0.25);
+    Intake.set(-0.23);
   }
   public void DesComer(){
-    Intake.set(-0.6);
+    Intake.set(0.68);
   }
   public void DejarComer(){
-    Intake.set(0);
+    Intake.set(-0.02);
   }
 
   public boolean IsIntakeMax(){

@@ -14,21 +14,21 @@ public class Constants {
 
   public static class OperatorConstants {
    
-    public static final double MaxElevatorSpeed = 0.70;
-    public static final double MaxArmSpeed = 0.45;
+    public static final double MaxElevatorSpeed = 0.90;
+    public static final double MaxArmSpeed = 0.55;
 
     public static final double MaxElevatorPosition = -180;
     public static final double MinElevatorPosition = 0;
 
-    public static final double DesiredMaxElevatorPosition = -180;
+    public static final double DesiredMaxElevatorPosition = -28;
     public static final double DesiredMinElevatorPosition = 0;
 
     public static final double MaxArmPosition = 82;
-    public static final double MinArmPosition = 5;
+    public static final double MinArmPosition = 3;
 
-    public static final double DesiredPonerCoral = 72;
-    public static final double DesiredComer = 80;
-    public static final double DesiredPonerArriba = 48;
+    public static final double DesiredPonerCoral = 71;
+    public static final double DesiredComer = 4;
+    public static final double DesiredPonerArriba = 53;
   }
 
   public class DriveConstants {
