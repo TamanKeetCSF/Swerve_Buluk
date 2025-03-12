@@ -33,7 +33,7 @@ public class SwerveConfig{
     }
 
     public class reductions{
-        public static final double DriveReduction = 5.9;
+        public static final double DriveReduction = 7.375;
         public static final double TurnReduction = 18.75;  
     }
 

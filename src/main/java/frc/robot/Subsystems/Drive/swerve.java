@@ -77,8 +77,8 @@ public class swerve extends SubsystemBase {
                 this::getSpeeds,              // Proveedor de velocidades (robot-relativo)
                 this::driveRobotRelative,     // Método para conducir de forma robot-relativa
                 new PPHolonomicDriveController(
-                    new PIDConstants(0.05, 0, 0),
-                    new PIDConstants(0.3, 0, 0)
+                    new PIDConstants(3, 0, 0),
+                    new PIDConstants(5, 0, 0)
                 ),
                 config,                       // Configuración manual del robot
                 () -> {
@@ -163,11 +163,11 @@ public class swerve extends SubsystemBase {
     }
 
     public double getAngle() {
-        return -gyro.getYaw().getValueAsDouble();
+        return gyro.getYaw().getValueAsDouble();
     }
 
     public Rotation2d getPigeonRotation() {
-        return Rotation2d.fromDegrees(-getAngle());
+        return Rotation2d.fromDegrees(getAngle());
     }
 
     public static Translation2d[] getModuleTranslations() {
@@ -250,8 +250,15 @@ public class swerve extends SubsystemBase {
 
     // Conduce utilizando velocidades robot-relative. Se convierten las velocidades de campo a robot-relativas.
     public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
+      ChassisSpeeds adjustedSpeeds = new ChassisSpeeds(
+        robotRelativeSpeeds.vxMetersPerSecond,
+        robotRelativeSpeeds.vyMetersPerSecond,
+        -robotRelativeSpeeds.omegaRadiansPerSecond
+       );
+        runVelocity(adjustedSpeeds);
+
         ChassisSpeeds fieldRelative = ChassisSpeeds.fromFieldRelativeSpeeds(robotRelativeSpeeds, getPose().getRotation());
-        runVelocity(robotRelativeSpeeds);
+        // runVelocity(robotRelativeSpeeds);
     }
 
     public Double getX() {
