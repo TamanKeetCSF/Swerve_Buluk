@@ -23,7 +23,7 @@ public class Constants {
     public static final double DesiredMaxElevatorPosition = -28;
     public static final double DesiredMinElevatorPosition = 0;
 
-    public static final double MaxArmPosition = 82;
+    public static final double MaxArmPosition = 78;
     public static final double MinArmPosition = 3;
 
     public static final double DesiredPonerCoral = 71;

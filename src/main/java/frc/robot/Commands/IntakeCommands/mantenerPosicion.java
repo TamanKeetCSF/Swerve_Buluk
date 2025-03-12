@@ -27,15 +27,18 @@ public class mantenerPosicion extends Command {
   @Override
   public void execute() {
 
-    double potencia = -control.getRightX();
+    double potencia = control.getRightX();
 
     if (potencia <= 0.3 && potencia >= -0.3){
       intake.actualizarMotor();
     }
-    else if ((intake.getArmAngle() < Constants.OperatorConstants.MinArmPosition && potencia <= 0.3) || (intake.getArmAngle() > Constants.OperatorConstants.MaxArmPosition && potencia >= -0.3)){
+    
+    else if ((intake.getArmAngle() > Constants.OperatorConstants.MinArmPosition && potencia <= -0.3) || (intake.getArmAngle() < Constants.OperatorConstants.MaxArmPosition && potencia >= 0.3)){
       intake.setIntake(potencia * 0.4);
       intake.ponerAngulo(intake.getArmAngle());
+      
     }
+
     
   }
 
