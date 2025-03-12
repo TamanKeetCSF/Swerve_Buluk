@@ -71,7 +71,7 @@ public class RobotContainer {
 
     driver.L1().whileTrue(DriveCommands.brake(chassis));
     m_elevador.setDefaultCommand(new ManualSetElevator(m_elevador, Player2Controller));
-    m_intake.setDefaultCommand(new mantenerPosicion(m_intake));
+    m_intake.setDefaultCommand(new mantenerPosicion(m_intake, Player2Controller));
     m_colgador.setDefaultCommand(new hangCommand(m_colgador, Player2Controller));
   }
 

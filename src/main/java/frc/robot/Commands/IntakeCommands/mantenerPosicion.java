@@ -9,11 +9,13 @@ import frc.robot.Subsystems.Intake;
 public class mantenerPosicion extends Command {
 
   private final Intake intake;
+  private final XboxController control;
 
   /** Creates a new ManualSetIntake. */
-  public mantenerPosicion(Intake intake) {
+  public mantenerPosicion(Intake intake, XboxController control) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intake = intake;
+    this.control = control;
     addRequirements(intake);
   }
 
@@ -24,7 +26,17 @@ public class mantenerPosicion extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.actualizarMotor();
+
+    double potencia = -control.getRightX();
+
+    if (potencia <= 0.3 && potencia >= -0.3){
+      intake.actualizarMotor();
+    }
+    else if ((intake.getArmAngle() < Constants.OperatorConstants.MinArmPosition && potencia <= 0.3) || (intake.getArmAngle() > Constants.OperatorConstants.MaxArmPosition && potencia >= -0.3)){
+      intake.setIntake(potencia * 0.4);
+      intake.ponerAngulo(intake.getArmAngle());
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
