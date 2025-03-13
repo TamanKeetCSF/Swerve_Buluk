@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.PS5Controller;
 import edu.wpi.first.wpilibj.XboxController;
@@ -55,6 +56,12 @@ public class RobotContainer {
   public RobotContainer() {
     
   ////AQUI LLAMAMOS A LAS INTRUCCIONES QUE SEGUIRA EL ROBOT TODO EL TIEMPO DURANTE EL TELE OP
+  /// 
+  /// NamedCommands.registerCommand("ponerAbajo", new setPonerAbajo(m_intake, m_elevador));
+    NamedCommands.registerCommand("goToComer", new setComer(m_intake, m_elevador));
+    NamedCommands.registerCommand("Comer", m_intake.Comer());
+    NamedCommands.registerCommand("DesComer", m_intake.DesComer());
+    NamedCommands.registerCommand("DejarComer", m_intake.DejarComer());
     autoChooser = AutoBuilder.buildAutoChooser("autoTest");
     configureBindings();
     //chassis.setDefaultCommand(new AutoAlignAprilTag(chassis));
@@ -111,11 +118,11 @@ public class RobotContainer {
        button2B.onTrue(new setComer(m_intake, m_elevador)); 
 
 
-      rightTrigger.onTrue(new InstantCommand(() -> m_intake.Comer(),m_intake))
-      .onFalse(new InstantCommand(() -> m_intake.DejarComer(),m_intake));
+      rightTrigger.onTrue(m_intake.Comer())
+      .onFalse(m_intake.DejarComer());
 
-      leftTrigger.onTrue(new InstantCommand(() -> m_intake.DesComer(),m_intake))
-      .onFalse(new InstantCommand(() -> m_intake.DejarComer(),m_intake));
+      leftTrigger.onTrue(m_intake.DesComer())
+      .onFalse(m_intake.DejarComer());
 
       //elevator
       new POVButton(Player2Controller, 0).onTrue(new InstantCommand(() -> m_bola.marcoBaja()))

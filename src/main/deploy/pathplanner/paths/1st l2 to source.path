@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.681528779886104,
-        "y": 2.6890173371920194
+        "x": 5.302,
+        "y": 5.122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.836796636754374,
-        "y": 2.884955829131542
+        "x": 5.139779033132322,
+        "y": 5.312221864959094
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.8059580252562313,
-        "y": 2.8035118811400217
+        "x": 1.241,
+        "y": 7.007730263157895
       },
       "prevControl": {
-        "x": 3.652930149087998,
-        "y": 2.6058190155240877
+        "x": 6.138450657894741,
+        "y": 5.150740131578947
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 1.5,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -120.61860540890937
+    "rotation": 126.0
   },
   "reversed": false,
-  "folder": "righVaraible2",
+  "folder": "dia 1",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -121.08965261795846
+    "rotation": 59.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

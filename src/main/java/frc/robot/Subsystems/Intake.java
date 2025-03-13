@@ -4,6 +4,8 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
@@ -66,13 +68,16 @@ public class Intake extends SubsystemBase {
     return encoderArm.getPosition(); // TICKS_PER_DEGREE;
   }
 
-  public void Comer(){
-    Intake.set(-0.23);
+  public Command Comer(){
+    //Intake.set(-0.23);
+    return new InstantCommand(() -> Intake.set(-0.23), this);
   }
-  public void DesComer(){
-    Intake.set(0.68);
+  public Command DesComer(){
+    //Intake.set(0.68);
+    return new InstantCommand(() -> Intake.set(0.68), this);
   }
-  public void DejarComer(){
-    Intake.set(-0.02);
+  public Command DejarComer(){
+    //Intake.set(-0.02);
+    return new InstantCommand(() -> Intake.set(-0.02), this);
   }
 }
