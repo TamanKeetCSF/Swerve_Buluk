@@ -19,7 +19,25 @@
         {
           "type": "named",
           "data": {
-            "name": "Retract"
+            "name": "ponerAbajo"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DesComer"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DejarComer"
           }
         },
         {
@@ -31,13 +49,25 @@
         {
           "type": "named",
           "data": {
-            "name": "Retract"
+            "name": "goToComer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Comer"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DejarComer"
           }
         },
         {
@@ -55,7 +85,25 @@
         {
           "type": "named",
           "data": {
-            "name": "Retract"
+            "name": "ponerAbajo"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DesComer"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DejarComer"
           }
         }
       ]

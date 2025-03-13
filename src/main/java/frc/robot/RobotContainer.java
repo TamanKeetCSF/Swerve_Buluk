@@ -57,12 +57,12 @@ public class RobotContainer {
     
   ////AQUI LLAMAMOS A LAS INTRUCCIONES QUE SEGUIRA EL ROBOT TODO EL TIEMPO DURANTE EL TELE OP
   /// 
-  /// NamedCommands.registerCommand("ponerAbajo", new setPonerAbajo(m_intake, m_elevador));
+    NamedCommands.registerCommand("ponerAbajo", new setPonerAbajo(m_intake, m_elevador));
     NamedCommands.registerCommand("goToComer", new setComer(m_intake, m_elevador));
     NamedCommands.registerCommand("Comer", m_intake.Comer());
     NamedCommands.registerCommand("DesComer", m_intake.DesComer());
     NamedCommands.registerCommand("DejarComer", m_intake.DejarComer());
-    autoChooser = AutoBuilder.buildAutoChooser("autoTest");
+    autoChooser = AutoBuilder.buildAutoChooser("Auto1");
     configureBindings();
     //chassis.setDefaultCommand(new AutoAlignAprilTag(chassis));
     chassis.setDefaultCommand(
@@ -113,9 +113,9 @@ public class RobotContainer {
        //button2X.onTrue(new setComer(m_intake,m_elevador)); 
        //button2A.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
        //button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
-       button2A.onTrue(new setPonerArriba(m_intake, m_elevador)); 
+       button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
        button2X.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
-       button2B.onTrue(new setComer(m_intake, m_elevador)); 
+       button2A.onTrue(new setComer(m_intake, m_elevador)); 
 
 
       rightTrigger.onTrue(m_intake.Comer())

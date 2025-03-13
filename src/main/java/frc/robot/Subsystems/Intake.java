@@ -50,9 +50,10 @@ public class Intake extends SubsystemBase {
     muneca.set(power);
   }
 
-  public void ponerAngulo(double angulo) {
+  public boolean ponerAngulo(double angulo) {
     setPoint = angulo;
     PIDMuneca.setSetpoint(setPoint);
+    return true;
   }
 
   public void actualizarMotor() {
@@ -60,8 +61,8 @@ public class Intake extends SubsystemBase {
     double pidOutput = PIDMuneca.calculate(currentPositionTicks);
     muneca.set(pidOutput);
     System.out.println("SetPoint (ticks): " + setPoint);
-    System.out.println("Encoder Position (ticks): " + currentPositionTicks);
-    System.out.println("Current Angle (deg): " + getArmAngle());
+    //System.out.println("Encoder Position (ticks): " + currentPositionTicks);
+    //System.out.println("Current Angle (deg): " + getArmAngle());
   }
 
   public double getArmAngle() {
