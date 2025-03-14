@@ -147,7 +147,8 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     System.out.println("funciono");
-    return new AutonomoMain(chassis, m_intake);
+    return autoChooser.getSelected();
+    //return new AutonomoMain(chassis, m_intake);
   }
 
 }

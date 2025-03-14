@@ -81,11 +81,7 @@ public class swerve extends SubsystemBase {
                     new PIDConstants(5, 0, 0)
                 ),
                 config,                       // Configuración manual del robot
-                () -> {
-                    // Invierte el camino si la alianza es roja.
-                    var alliance = DriverStation.getAlliance();
-                    return alliance.isPresent() && alliance.get() == DriverStation.Alliance.Red;
-                },
+                () -> true,
                 this                          // Referencia a este subsistema (para requisitos de comandos)
             );
         } catch(Exception e) {

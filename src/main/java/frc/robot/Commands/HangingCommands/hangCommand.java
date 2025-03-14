@@ -24,7 +24,7 @@ public class hangCommand extends Command {
   @Override
   public void execute() {
     if( controller.getStartButton()){
-      hanger.setHanger(controller.getRightY());
+      hanger.setHanger(-controller.getRightY());
     }
     else{
       hanger.setHanger(0);

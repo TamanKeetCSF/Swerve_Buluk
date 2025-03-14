@@ -4,6 +4,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -38,7 +39,7 @@ public class Intake extends SubsystemBase {
     //encoderArm.setPosition(0);  
 
     PIDMuneca = new PIDController(kP, kI, kD);
-    PIDMuneca.setTolerance(0.5);
+    PIDMuneca.setTolerance(0.3);
   }
 
   @Override
@@ -61,6 +62,7 @@ public class Intake extends SubsystemBase {
     double pidOutput = PIDMuneca.calculate(currentPositionTicks);
     muneca.set(pidOutput);
     System.out.println("SetPoint (ticks): " + setPoint);
+    SmartDashboard.putNumber("INTAKE_SETPOINT",setPoint);
     //System.out.println("Encoder Position (ticks): " + currentPositionTicks);
     //System.out.println("Current Angle (deg): " + getArmAngle());
   }
