@@ -39,7 +39,7 @@ public class Intake extends SubsystemBase {
     //encoderArm.setPosition(0);  
 
     PIDMuneca = new PIDController(kP, kI, kD);
-    PIDMuneca.setTolerance(0.3);
+    PIDMuneca.setTolerance(0.15);
   }
 
   @Override
