@@ -19,7 +19,7 @@ public class setPonerAbajo extends SequentialCommandGroup {
   public setPonerAbajo(Intake intake, Elevator elevator) {
     addCommands(
       new ParallelCommandGroup(
-      new InstantCommand(() -> intake.ponerAngulo(71)),
+      new InstantCommand(() -> intake.ponerAngulo(69)),
       new SetElevatorMin(elevator))
       
       

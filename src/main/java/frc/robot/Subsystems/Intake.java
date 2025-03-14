@@ -38,7 +38,7 @@ public class Intake extends SubsystemBase {
     //encoderArm.setPosition(0);  
 
     PIDMuneca = new PIDController(kP, kI, kD);
-    PIDMuneca.setTolerance(2);
+    PIDMuneca.setTolerance(0.5);
   }
 
   @Override
@@ -69,16 +69,20 @@ public class Intake extends SubsystemBase {
     return encoderArm.getPosition(); // TICKS_PER_DEGREE;
   }
 
-  public Command Comer(){
+  public boolean Comer(){
     //Intake.set(-0.23);
-    return new InstantCommand(() -> Intake.set(-0.23), this);
+    Intake.set(-0.23);
+    return true;
   }
-  public Command DesComer(){
+  public boolean DesComer(){
     //Intake.set(0.68);
-    return new InstantCommand(() -> Intake.set(0.68), this);
+    Intake.set(0.68);
+    return true;
   }
-  public Command DejarComer(){
+  public boolean DejarComer(){
     //Intake.set(-0.02);
-    return new InstantCommand(() -> Intake.set(-0.02), this);
+    //return new InstantCommand(() -> Intake.set(-0.02), this);
+    Intake.set(-0.02);
+    return true;
   }
 }

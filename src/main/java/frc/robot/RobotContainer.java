@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Commands.DebuggingGroup;
 import frc.robot.Commands.AutonomousCommands.AutonomoMain;
 import frc.robot.Commands.AutonomousCommands.setPonerArriba;
 import frc.robot.Commands.AutonomousCommands.setPonerAbajo;
@@ -59,10 +60,10 @@ public class RobotContainer {
   /// 
     NamedCommands.registerCommand("ponerAbajo", new setPonerAbajo(m_intake, m_elevador));
     NamedCommands.registerCommand("goToComer", new setComer(m_intake, m_elevador));
-    NamedCommands.registerCommand("Comer", m_intake.Comer());
-    NamedCommands.registerCommand("DesComer", m_intake.DesComer());
-    NamedCommands.registerCommand("DejarComer", m_intake.DejarComer());
-    autoChooser = AutoBuilder.buildAutoChooser("Auto1");
+    NamedCommands.registerCommand("Comer", new InstantCommand(()-> m_intake.Comer()));
+    NamedCommands.registerCommand("DesComer", new InstantCommand(()-> m_intake.DesComer()));
+    NamedCommands.registerCommand("DejarComer", new InstantCommand(()-> m_intake.DejarComer()));
+    autoChooser = AutoBuilder.buildAutoChooser("a");
     configureBindings();
     //chassis.setDefaultCommand(new AutoAlignAprilTag(chassis));
     chassis.setDefaultCommand(
@@ -110,7 +111,7 @@ public class RobotContainer {
     button1A.whileTrue(new AutoAlignAprilTag(chassis));
       //intake
 
-       //button2X.onTrue(new setComer(m_intake,m_elevador)); 
+       //button2Y.onTrue(new DebuggingGroup(m_intake,m_elevador)); 
        //button2A.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
        //button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
        button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
@@ -118,11 +119,11 @@ public class RobotContainer {
        button2A.onTrue(new setComer(m_intake, m_elevador)); 
 
 
-      rightTrigger.onTrue(m_intake.Comer())
-      .onFalse(m_intake.DejarComer());
+      rightTrigger.onTrue(new InstantCommand(()-> m_intake.Comer()))
+      .onFalse(new InstantCommand(()-> m_intake.DejarComer()));
 
-      leftTrigger.onTrue(m_intake.DesComer())
-      .onFalse(m_intake.DejarComer());
+      leftTrigger.onTrue(new InstantCommand(()-> m_intake.DesComer()))
+      .onFalse(new InstantCommand(()-> m_intake.DejarComer()));
 
       //elevator
       new POVButton(Player2Controller, 0).onTrue(new InstantCommand(() -> m_bola.marcoBaja()))
@@ -146,7 +147,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     System.out.println("funciono");
-    return autoChooser.getSelected();
+    return new AutonomoMain(chassis, m_intake);
   }
 
 }

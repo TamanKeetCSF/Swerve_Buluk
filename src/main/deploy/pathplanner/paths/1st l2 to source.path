@@ -20,7 +20,7 @@
         "y": 7.01735197368421
       },
       "prevControl": {
-        "x": 6.1386513157894775,
+        "x": 6.138651315789477,
         "y": 5.160361842105262
       },
       "nextControl": null,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 126.0
+    "rotation": -53.42696902148069
   },
   "reversed": false,
   "folder": "dia 1",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.99999999999999
+    "rotation": -120.56707218716352
   },
   "useDefaultConstraints": true
 }

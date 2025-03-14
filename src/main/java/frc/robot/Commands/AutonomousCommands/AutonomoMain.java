@@ -21,7 +21,7 @@ public class AutonomoMain extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(() -> drive.runVelocity(new ChassisSpeeds(-0.6,0,0)), drive ),
       new WaitCommand(3.5),
-      new InstantCommand(() -> intake.ponerAngulo(72)),
+      new InstantCommand(() -> intake.ponerAngulo(70)),
       new InstantCommand(() -> drive.runVelocity(new ChassisSpeeds(0,0,0)), drive )
       //new AutoDrive(drive,0.0)
 

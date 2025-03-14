@@ -11,15 +11,15 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "ponerAbajo"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
           }
         },
         {
@@ -53,6 +53,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "Comer"
@@ -77,15 +83,15 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "ponerAbajo"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
           }
         },
         {
@@ -109,7 +115,7 @@
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": null,
   "choreoAuto": false
 }
