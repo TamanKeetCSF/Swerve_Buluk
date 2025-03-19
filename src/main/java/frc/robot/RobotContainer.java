@@ -103,6 +103,8 @@ public class RobotContainer {
 
       final JoystickButton button2BumperL = new JoystickButton(Player2Controller, 5);
       final JoystickButton button2BumperR = new JoystickButton(Player2Controller, 6);
+
+    
       Trigger leftTrigger = new Trigger(() -> Player2Controller.getRawAxis(2) > 0.4); // Left trigger
       Trigger rightTrigger = new Trigger(() -> Player2Controller.getRawAxis(3) > 0.4); // Right trigger
 
@@ -117,6 +119,7 @@ public class RobotContainer {
        button2B.onTrue(new setPonerArriba(m_intake, m_elevador)); 
        button2X.onTrue(new setPonerAbajo(m_intake, m_elevador)); 
        button2A.onTrue(new setComer(m_intake, m_elevador)); 
+       button1B.whileTrue(new InstantCommand(chassis::resetHeading, chassis));
 
 
       rightTrigger.onTrue(new InstantCommand(()-> m_intake.Comer()))
@@ -147,8 +150,8 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     System.out.println("funciono");
-    //return autoChooser.getSelected();
-    return new AutonomoMain(chassis, m_intake);
+    return autoChooser.getSelected();
+    //return new AutonomoMain(chassis, m_intake);
   }
 
 }

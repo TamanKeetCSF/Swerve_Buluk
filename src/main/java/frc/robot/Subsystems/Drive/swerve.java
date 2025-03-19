@@ -162,6 +162,10 @@ public class swerve extends SubsystemBase {
         return gyro.getYaw().getValueAsDouble();
     }
 
+    public void resetHeading(){
+        gyro.reset();
+    }
+    
     public Rotation2d getPigeonRotation() {
         return Rotation2d.fromDegrees(getAngle());
     }
