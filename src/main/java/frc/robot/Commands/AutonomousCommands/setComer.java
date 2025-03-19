@@ -20,7 +20,7 @@ public class setComer extends SequentialCommandGroup {
   public setComer(Intake intake, Elevator elevator) {
     addCommands(
       new ParallelCommandGroup(
-      new InstantCommand(() -> intake.ponerAngulo(5.1)),
+      new InstantCommand(() -> intake.ponerAngulo(5.05)),
       new SetElevatorMin(elevator))
       
       

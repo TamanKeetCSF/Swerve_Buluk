@@ -73,7 +73,7 @@ public class Intake extends SubsystemBase {
 
   public boolean Comer(){
     //Intake.set(-0.23);
-    Intake.set(-0.23);
+    Intake.set(-0.27);
     return true;
   }
   public boolean DesComer(){

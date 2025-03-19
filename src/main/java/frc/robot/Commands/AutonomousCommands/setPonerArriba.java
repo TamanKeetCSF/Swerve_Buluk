@@ -20,7 +20,7 @@ public class setPonerArriba extends SequentialCommandGroup {
   public setPonerArriba(Intake intake, Elevator elevator) {
     addCommands(
       new ParallelCommandGroup(
-      new InstantCommand(() -> intake.ponerAngulo(53)),
+      new InstantCommand(() -> intake.ponerAngulo(51.7)),
       new SetElevatorMax(elevator))
       
       
