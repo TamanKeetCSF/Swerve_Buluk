@@ -16,14 +16,20 @@ import frc.robot.BulukLib.Swerve.SwerveConfig.measures;
 import frc.robot.BulukLib.Swerve.SwerveConfig.speeds;
 import frc.robot.BulukLib.Util.QoLUtil;
 import frc.robot.Subsystems.Drive.swerve;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 import java.util.function.DoubleSupplier;
+import java.util.function.BooleanSupplier;
 
 
 
 public class DriveCommands {
 
   private static final double DEADBAND = 0.1;
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
   private DriveCommands() {}
 
@@ -49,7 +55,8 @@ public class DriveCommands {
       DoubleSupplier ySupplier,
       DoubleSupplier omegaSupplier,
       DoubleSupplier R2,
-      DoubleSupplier L2) {
+      DoubleSupplier L2, 
+      BooleanSupplier ButtonTriangle ) {
     return Commands.run(
         () -> {
           // Apply deadband
